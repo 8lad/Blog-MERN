@@ -1,0 +1,30 @@
+{
+	"name": "blog-mern",
+	"version": "1.0.0",
+	"description": "Testing blog project",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node index.js",
+		"start:dev": "nodemon index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/8lad/blog-mern.git"
+	},
+	"author": "Vlad",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/8lad/blog-mern/issues"
+	},
+	"homepage": "https://github.com/8lad/blog-mern#readme",
+	"dependencies": {
+		"bcrypt": "^5.1.0",
+		"express": "^4.18.2",
+		"express-validator": "^6.14.2",
+		"jsonwebtoken": "^9.0.0",
+		"mongoose": "^6.8.3",
+		"multer": "^1.4.5-lts.1",
+		"nodemon": "^2.0.20"
+	}
+}
