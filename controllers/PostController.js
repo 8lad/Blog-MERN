@@ -1,8 +1,15 @@
 import PostModel from '../models/Post.js';
 
 export const getAll = async (req, res) => {
+    const { sorting } = req.query;
+    const sortingByDate = {
+        createdAt: -1
+    };
+    const sortingByViews = { viewsCount: -1 };
+    const sortingType = sorting === "popular" ? sortingByViews : sortingByDate;
+
     try {
-        const posts = await PostModel.find().populate('user').exec();
+        const posts = await PostModel.find().sort(sortingType).populate('user').exec();
 
         res.json(posts);
     } catch (error) {
@@ -39,10 +46,9 @@ export const getOne = async (req, res) => {
                         message: 'Can not finde exact post'
                     });
                 }
-
                 res.json(doc);
             }
-        );
+        ).populate('user');
 
     } catch (error) {
         console.log(error);
@@ -92,7 +98,7 @@ export const create = async (req, res) => {
             title: req.body.title,
             text: req.body.text,
             imageUrl: req.body.imageUrl,
-            tage: req.body.tags,
+            tags: req.body.tags,
             user: req.userId
         });
 
@@ -112,14 +118,14 @@ export const update = async (req, res) => {
     try {
         const postId = req.params.id;
 
-        PostModel.updateOne({
+        await PostModel.updateOne({
             _id: postId
         },
             {
                 title: req.body.title,
                 text: req.body.text,
                 imageUrl: req.body.imageUrl,
-                tage: req.body.tags,
+                tags: req.body.tags,
                 user: req.userId
             });
 
@@ -132,4 +138,19 @@ export const update = async (req, res) => {
             message: 'Can not update the post'
         })
     }
-}
+};
+
+export const getLastTags = async (req, res) => {
+    try {
+        const posts = await PostModel.find().limit(5).exec();
+
+        const tags = posts.map(obj => obj.tags).flat().slice(0, 5);
+
+        res.json(tags)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Can not load all tags'
+        })
+    }
+};
