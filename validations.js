@@ -13,8 +13,14 @@ export const loginValidation = [
 ];
 
 export const postCreateValidation = [
-    body('title', 'Puth the title please').isLength({ min: 3 }).isString(),
+    body('title', 'Put the title please').isLength({ min: 3 }).isString(),
     body('text', 'Put the post text please').isLength({ min: 10 }).isString(),
     body('tags', 'Invalid tags format, please use an array').optional().isArray(),
     body('imgUrl', 'Invalid image link').optional().isString()
+];
+
+export const commentCreateValidation = [
+    body('postId', 'Put the post id please').isString(),
+    body('text', 'Put the correct length of the comment text').isLength({ min: 3 }).isString(),
+    body('user', 'Put the correct format of user data').isObject()
 ];
