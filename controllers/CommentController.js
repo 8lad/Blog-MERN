@@ -21,9 +21,9 @@ export const create = async (req, res) => {
             user: req.body.user
         });
 
-        const post = await doc.save();
-
-        res.json(post);
+        const comment = await doc.save();
+        const comments = await CommentModel.find().populate('user').exec();
+        res.json(comments);
 
     } catch (error) {
         console.log(error);
