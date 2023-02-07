@@ -4,7 +4,7 @@ export const registerValidation = [
     body('email', 'Incorrect email format').isEmail(),
     body('passwordHash', 'Password must be more than 5 symbols lenght').isLength({ min: 5 }),
     body('fullName', 'Set your name').isLength({ min: 3 }),
-    body('avatarUrl', 'Incorrect image URL').optional().isURL()
+    body('avatarUrl', 'Incorrect image URL').optional().isString()
 ];
 
 export const loginValidation = [
