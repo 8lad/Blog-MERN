@@ -8,11 +8,12 @@ import { UserController, PostController, CommentController } from './controllers
 import { registerValidation, loginValidation, postCreateValidation, commentCreateValidation } from './validations.js';
 import { checkAuth, handleValidationErrors } from './utils/index.js';
 
+mongoose.set('strictQuery', false);
+
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err));
 
-mongoose.set('strictQuery', false);
 
 const app = express();
 
