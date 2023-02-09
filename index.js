@@ -12,6 +12,8 @@ mongoose.connect(process.env.MONGODB_URL)
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err));
 
+mongoose.set('strictQuery', false);
+
 const app = express();
 
 const storage = multer.diskStorage({
