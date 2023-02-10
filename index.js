@@ -63,9 +63,9 @@ app.patch('/posts/:id', checkAuth, postCreateValidation, handleValidationErrors,
 app.get('/comments', CommentController.getAllComments);
 app.post('/comments', checkAuth, commentCreateValidation, handleValidationErrors, CommentController.create);
 
-app.listen(process.env.PORT, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
         return console.log(err);
     }
-    console.log('Example app listening on port 4444!');
+    console.log(process.env.PORT, 'Example app listening on port 4444!');
 });
