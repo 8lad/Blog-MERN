@@ -99,11 +99,10 @@ export const getMe = async (req, res) => {
             res.status(404).json({
                 message: 'Can not find exact user'
             });
+        } else {
+            const { passwordHash, ...userData } = user._doc;
+            res.json(userData)
         }
-
-        const { passwordHash, ...userData } = user._doc;
-
-        res.json(userData)
     } catch (error) {
         res.status(400).json({
             message: 'Invalid request'
